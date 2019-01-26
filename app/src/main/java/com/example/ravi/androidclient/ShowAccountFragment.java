@@ -76,7 +76,7 @@ public class ShowAccountFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView =  inflater.inflate(R.layout.fragment_show_account, container, false);
          firstName = rootView.findViewById(R.id.first_name);
-         lastName = rootView.findViewById(R.id.last_name);
+         //lastName = rootView.findViewById(R.id.last_name);
          identity = rootView.findViewById(R.id.user_identity);
          email = rootView.findViewById(R.id.user_email);
 
@@ -86,7 +86,7 @@ public class ShowAccountFragment extends Fragment {
 
     private void setValues() {
         firstName.setText(user.getFirstName());
-        lastName.setText(user.getLastName());
+       // lastName.setText(user.getLastName());
         identity.setText(user.getIdentity());
         email.setText(user.getEmail());
     }

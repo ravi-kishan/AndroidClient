@@ -12,12 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class DoctorFragment extends Fragment {
 
-    Button getRecord;
-    Button postRecord;
+    TextView getRecord;
+    TextView postRecord;
     private String patientId;
     private AlertDialog dialog;
 

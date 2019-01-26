@@ -23,6 +23,7 @@ public class Patient {
     @Expose
     private List<MedRec> medRec = null;
 
+
     public String get$class() {
         return $class;
     }

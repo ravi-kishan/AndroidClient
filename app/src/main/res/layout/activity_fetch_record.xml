@@ -1,38 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FetchRecordActivity">
+    tools:context=".FetchRecordActivity"
+    android:orientation="vertical"
+    android:background="#00CCCC">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Patient id"/>
+        android:text="Patient Id"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:padding="10dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/patient_id"/>
+        android:id="@+id/patient_id"
+        android:textSize="15dp"
+        android:padding="10dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="First Name"
+        android:textSize="20dp"
+        android:textStyle="bold"
+
+        android:padding="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/patient_firstName"
+        android:textSize="15dp"
+        android:padding="10dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last Name"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:padding="10dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/patient_lastName"
+        android:textSize="15dp"
+        android:padding="10dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="First Name"/>
+        android:text="Diagnosis"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:padding="10dp"
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/patient_firstName"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Last Name"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/patient_lastName"/>
+        android:id="@+id/patient_diagnosis"
+        android:textSize="15dp"
+        android:background="@drawable/edge"
+        android:padding="10dp"/>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="100dp"
         android:id="@+id/medicinelv"></ListView>
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="400dp"
+        android:id="@+id/image_list_view">
+
+    </ListView>
+
 </LinearLayout>
+    </ScrollView>

@@ -8,6 +8,8 @@
     <string name="logout_confirmation_message">Are you sure you want to log out?</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="doctor">Doctor</string>
+    <string name="patient">Patient</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -39,13 +39,11 @@ public class MainActivity extends AppCompatActivity{
     private boolean loggedIn;
     private boolean register;
     public static User currentUser;
-    //private Bundle savedInstanceState;
     FirebaseAuth.AuthStateListener authStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // this.savedInstanceState = savedInstanceState;
         setContentView(R.layout.activity_main);
         register = false;
 
@@ -53,8 +51,6 @@ public class MainActivity extends AppCompatActivity{
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("users");
-        Log.i("hl",databaseReference.getKey());//.child("hospital-management-18f97")
-                //.child("users");
 
          authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -62,19 +58,13 @@ public class MainActivity extends AppCompatActivity{
                 if(firebaseAuth.getCurrentUser() == null) {
                     login();
 
-
                 } else {
                     loggedIn = true;
                     LinearLayout linearLayout = (LinearLayout)findViewById(R.id.welcome_layout);
                     FrameLayout frameLayout = (FrameLayout)findViewById(R.id.fragment_container);
                     linearLayout.setVisibility(View.GONE);
                     frameLayout.setVisibility(View.VISIBLE);
-                    if(firebaseAuth.getCurrentUser().getPhoneNumber() == null) {
-                        showFragment(1);
-
-                    } else {
-                        showFragment(2);
-                    }
+                    showFragment();
                 }
             }
         };
@@ -154,13 +144,12 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    private void showFragment(int number) {
+    private void showFragment() {
         LinearLayout linearLayout = (LinearLayout)findViewById(R.id.welcome_layout);
         FrameLayout frameLayout = (FrameLayout)findViewById(R.id.fragment_container);
         linearLayout.setVisibility(View.GONE);
         frameLayout.setVisibility(View.VISIBLE);
         DatabaseReference userReference;
-        Log.i("hello","logged");
             userReference = databaseReference.child(firebaseAuth.getCurrentUser().getUid());
 
 
@@ -194,7 +183,6 @@ public class MainActivity extends AppCompatActivity{
             }
         }) ;
 
-        Log.i("hi",userReference.getKey());
     }
 
 

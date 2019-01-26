@@ -1,40 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PostRecordActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#00CCCC">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter patient id"/>
+        android:text="Enter patient Id"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:padding="10dp"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/patient_id_edittext"/>
+        android:id="@+id/patient_id_edittext"
+        android:textSize="15dp"
+        android:padding="10dp"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter first name"/>
+        android:text="Diagnosis"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:padding="10dp"/>
     <EditText
+        android:id="@+id/diagnosis_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/patient_firstName_edittext"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter last name"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/patient_lastName_edittext"/>
+        android:background="@drawable/edge"
+        android:text="Write here..."
+        android:gravity="top"
+        android:inputType="textCapSentences|textMultiLine"
+        android:maxLength="2000"
+        android:maxLines="10"
+        android:textSize="15dp"
+        android:minHeight="150dp"
+        android:padding="10dp"/>
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/medicine_listView">
+        android:layout_height="100dp"
+        android:id="@+id/medicine_listView"
+        android:layout_weight="1">
 
     </ListView>
 
@@ -53,7 +68,9 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/medicine_enter_edittext"/>
+                android:id="@+id/medicine_enter_edittext"
+                android:textSize="15dp"
+                android:padding="10dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -68,13 +85,20 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/quantity_enter_edittext"/>
+                android:id="@+id/quantity_enter_edittext"
+                android:textSize="15dp"
+                android:padding="10dp"
+                android:inputType="number"
+                android:text="1"/>
         </LinearLayout>
-        <Button
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Enter"
-            android:onClick="medicineClicked"/>
+            android:onClick="medicineClicked"
+            android:src="@drawable/ic_done"
+            android:textSize="15dp"
+            android:padding="10dp"/>
     </LinearLayout>
     <Button
         android:layout_width="wrap_content"
@@ -83,3 +107,4 @@
         android:id="@+id/submit_patient"
         android:onClick="submitPatient"/>
 </LinearLayout>
+</ScrollView>

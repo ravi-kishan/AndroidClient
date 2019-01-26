@@ -5,26 +5,63 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DoctorFragment"
-    android:orientation="vertical">
-
-    <Button
+    android:orientation="vertical"
+    android:background="#00CCCC">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Welcome Doctor"
+        android:textColor="#111111"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_weight="0.5"/>
+    <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edge"
+        android:layout_weight="1">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Write Prescription"
-        android:textSize="20dp"
+        android:textSize="30dp"
         android:textStyle="bold"
         android:id="@+id/post_record"
-        android:onClick="buttonClicked"
-        />
+        android:textColor="#111111"
+        android:gravity="center"
 
-    <Button
+        />
+    </RelativeLayout>
+    <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="Check Record"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:id="@+id/get_record"/>
+        android:layout_weight="1"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edge"
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="See Record"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:id="@+id/get_record"
+            android:textColor="#111111"
+            android:gravity="center"
+
+            />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
 </LinearLayout>

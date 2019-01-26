@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,9 +72,11 @@ public class CreateAccountFragment extends Fragment implements View.OnClickListe
     @Override
     public void onClick(View view) {
 
+            String id = identitySpinner.getSelectedItem().toString();
             User user = new User(firebaseUser.getDisplayName(),firebaseUser.getDisplayName(),firebaseUser.getEmail(),identitySpinner.getSelectedItem().toString());
             databaseReference.child(firebaseUser.getUid()).setValue(user);
-            if(user.getIdentity() == "Patient") {
+            Log.i("spinner",identitySpinner.getSelectedItem().toString());
+            if(identitySpinner.getSelectedItem().equals("Patient")) {
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, new ShowAccountFragment())
@@ -82,7 +85,7 @@ public class CreateAccountFragment extends Fragment implements View.OnClickListe
             else {
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container, new ShowAccountFragment())
+                        .replace(R.id.fragment_container, new DoctorFragment())
                         .commit();
             }
 

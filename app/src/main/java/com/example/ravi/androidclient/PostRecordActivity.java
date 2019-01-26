@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -31,6 +32,7 @@ import retrofit2.Response;
 public class PostRecordActivity extends AppCompatActivity {
 
     Patient patient;
+    CreateRecord createRecord;
     private static final int SELECT_PHOTO = 100;
     Uri selectedImage;
     FirebaseStorage storage;
@@ -44,6 +46,7 @@ public class PostRecordActivity extends AppCompatActivity {
     EditText patientLastName;
     EditText medicineEnter;
     EditText quantityEnter;
+    EditText diagnosis;
     List<MedRec> medRecList;
     List<String> medicineList;
     List<Integer> quantityList;
@@ -64,14 +67,15 @@ public class PostRecordActivity extends AppCompatActivity {
         quantityList = new ArrayList<>();
         medicineArrayList = new ArrayList<Medicine>();
         medicineAdapter = new MedicineAdapter(this,medicineArrayList);
+        createRecord = new CreateRecord();
+        createRecord.set$class("org.ehr.hackathon.Patient");
 
-patient.set$class("org.ehr.hackathon.Patient");
+patient.set$class("org.ehr.hackathon.CreateMedicalRecord");
         patientId = findViewById(R.id.patient_id_edittext);
-        patientFirstName = findViewById(R.id.patient_firstName_edittext);
-        patientLastName = findViewById(R.id.patient_lastName_edittext);
         medicineEnter = findViewById(R.id.medicine_enter_edittext);
         quantityEnter = findViewById(R.id.quantity_enter_edittext);
         listView = findViewById(R.id.medicine_listView);
+        diagnosis = findViewById(R.id.diagnosis_edittext);
         listView.setAdapter(medicineAdapter);
 
         //imageView = (ImageView) findViewById(R.id.imageView2);
@@ -85,15 +89,21 @@ patient.set$class("org.ehr.hackathon.Patient");
     }
 
     public void submitPatient (View view) {
-        patient.setFirstName(patientFirstName.getText().toString());
+        //patient.setFirstName(patientFirstName.getText().toString());
         patient.setPatientId(patientId.getText().toString());
-        patient.setLastName(patientLastName.getText().toString());
+        //patient.setLastName(patientLastName.getText().toString());
         medRec.setMedicine(medicineList);
         medRec.setQuantity(quantityList);
         medRecList = new ArrayList<MedRec>();
         medRecList.add(medRec);
 
         patient.setMedRec(medRecList);
+        createRecord.setDoctor("org.ehr.hackathon.Doctor#" +"d1");
+        createRecord.setMedicine(medicineList);
+        createRecord.setQuantity(quantityList);
+        createRecord.setDiagnosis(diagnosis.getText().toString());
+        createRecord.setPatient("org.ehr.hackathon.Patient#p1);//"+patientId.getText().toString());
+        System.out.println(createRecord);
         postData();
     }
 
@@ -128,83 +138,31 @@ patient.set$class("org.ehr.hackathon.Patient");
         }
     }
 
-    /*public void uploadImage(View view) {
-
-        //create reference to images folder and assing a name to the file that will be uploaded
-        imageRef = storageRef.child("images/"+selectedImage.getLastPathSegment());
-
-        //creating and showing progress dialog
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMax(100);
-        progressDialog.setMessage("Uploading...");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.show();
-        progressDialog.setCancelable(false);
-
-        //starting upload
-        uploadTask = imageRef.putFile(selectedImage);
-
-        // Observe state change events such as progress, pause, and resume
-        uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-
-                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-
-                //sets and increments value of progressbar
-                progressDialog.incrementProgressBy((int) progress);
-
-            }
-        });
-
-        // Register observers to listen for when the download is done or if it fails
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-
-                // Handle unsuccessful uploads
-                Toast.makeText(getApplicationContext(),"Error in uploading!",Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
-
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-                Uri downloadUrl = taskSnapshot.getDownloadUrl();
-
-                Toast.makeText(getApplicationContext(),"Upload successful",Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
-
-                //showing the uploaded image in ImageView using the download url
-                Picasso.with(getApplicationContext()).load(downloadUrl).into(imageView);
-
-            }
-        });
-
-
-    }
-}
-*/
 
 
     private void postData() {
-        Call<Patient> patientCall = BlockChainAPI.getPatientService().savePost(patient);
-        patientCall.enqueue(new Callback<Patient>() {
+
+        Call<CreateRecord> createRecordCall = BlockChainAPI.getCreateRecordService().savePost(
+                
+                "org.ehr.hackathon.Patient#"+patientId.getText().toString(),
+                "org.ehr.hackathon.Doctor#"+FirebaseAuth.getInstance().getCurrentUser().getEmail(),
+                diagnosis.getText().toString(),
+                medicineList,
+                quantityList
+        );
+
+
+
+        createRecordCall.enqueue(new Callback<CreateRecord>() {
             @Override
-            public void onResponse(Call<Patient> call, Response<Patient> response) {
-                Patient patient = response.body();
+            public void onResponse(Call<CreateRecord> call, Response<CreateRecord> response) {
                 if(response.isSuccessful())
-                Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
-                Log.i("responce",response.message());
+                    Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
+                //Log.i("responce",response.errorBody().toString());
             }
 
             @Override
-            public void onFailure(Call<Patient> call, Throwable t) {
+            public void onFailure(Call<CreateRecord> call, Throwable t) {
                 Toast.makeText(getApplicationContext(),"Some error occured",Toast.LENGTH_SHORT).show();
                 Log.i("retrofit error",t.getMessage());
             }

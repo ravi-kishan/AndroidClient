@@ -5,14 +5,14 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MedRec {
+public class CreateRecord {
 
     @SerializedName("$class")
     @Expose
     private String $class;
-    @SerializedName("recordId")
+    @SerializedName("patient")
     @Expose
-    private String recordId;
+    private String patient;
     @SerializedName("doctor")
     @Expose
     private String doctor;
@@ -26,13 +26,6 @@ public class MedRec {
     @Expose
     private List<Integer> quantity = null;
 
-    @SerializedName("files")
-    @Expose
-    private List<String> files = null;
-
-    public List<String> getFiles() { return files;}
-    public void setFiles(List<String> files) {this.files = files;}
-
     public String get$class() {
         return $class;
     }
@@ -41,12 +34,12 @@ public class MedRec {
         this.$class = $class;
     }
 
-    public String getRecordId() {
-        return recordId;
+    public String getPatient() {
+        return patient;
     }
 
-    public void setRecordId(String recordId) {
-        this.recordId = recordId;
+    public void setPatient(String patient) {
+        this.patient = patient;
     }
 
     public String getDoctor() {

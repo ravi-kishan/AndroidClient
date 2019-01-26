@@ -45,8 +45,11 @@ public class GetRecordActivity extends AppCompatActivity {
     List<Integer> quantityList;
 
     ListView listView;
+    ListView imagesListView;
     ArrayList<Medicine> medicineArrayList;
     MedicineAdapter medicineAdapter;
+    ArrayList<Images> imagesArrayList;
+    ImagesAdapter imagesAdapter;
 
 
     @Override
@@ -65,12 +68,16 @@ public class GetRecordActivity extends AppCompatActivity {
         quantityList = new ArrayList<>();
         medicineArrayList = new ArrayList<Medicine>();
         medicineAdapter = new MedicineAdapter(this,medicineArrayList);
+        imagesArrayList = new ArrayList<Images>();
+        imagesAdapter = new ImagesAdapter(this,imagesArrayList);
 
         patientID = findViewById(R.id.patient_id_text);
         patientFirstName = findViewById(R.id.patient_firstName_text);
         patientLastName = findViewById(R.id.patient_lastName_text);
         listView = findViewById(R.id.medicine_lV);
         listView.setAdapter(medicineAdapter);
+        imagesListView = findViewById(R.id.image_list_view);
+        imagesListView.setAdapter(imagesAdapter);
 
         getData();
 
@@ -100,6 +107,7 @@ public class GetRecordActivity extends AppCompatActivity {
                     medicineArrayList.add(medicine);
                 }
                 medicineAdapter.notifyDataSetChanged();
+                imagesAdapter.notifyDataSetChanged();
             }
 
             @Override
